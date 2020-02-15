@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.eratoiklio.flashcards.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratoiklio.flashcards.databinding.MainFragmentBinding
+import com.eratoiklio.flashcards.viewmodel.ViewModelFactory
 
 class MainFragment : Fragment() {
 
@@ -19,13 +22,18 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory(activity?.application)).get(MainViewModel::class.java)
+        viewModel.allFlashCards.observe(this, Observer {
+            cards -> viewModel.adapter.setWords(cards)
+        })
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = MainFragmentBinding.inflate(layoutInflater)
-        binding.viewmodel = viewModel
+        binding.viewModel = viewModel
+        binding.flashcardSets.adapter = viewModel.adapter
+        binding.flashcardSets.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 }

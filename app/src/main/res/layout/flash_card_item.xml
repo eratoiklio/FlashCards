@@ -4,21 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.eratoiklio.flashcards.ui.flashcard.WordListAdapter.FlashCardViewHolder" />
     </data>
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.mainLang}"
             tools:text="Set name"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.secondLang}"
             tools:text="Set description"/>
 
     </LinearLayout>
