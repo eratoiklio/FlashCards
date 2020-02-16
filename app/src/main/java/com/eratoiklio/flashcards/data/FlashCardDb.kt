@@ -5,8 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.eratoiklio.flashcards.model.FlashCard
+import com.eratoiklio.flashcards.model.FlashCardSet
+import com.eratoiklio.flashcards.model.FlashCardSetJoin
 
-@Database(entities = [FlashCard::class], version = 1, exportSchema = false)
+@Database(entities = [FlashCard::class, FlashCardSet::class, FlashCardSetJoin::class], version = 1, exportSchema = false)
 abstract class FlashCardDb : RoomDatabase() {
 
     abstract fun flashCardDao(): FlashCardDao

@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.eratoiklio.flashcards.databinding.FlashCardItemBinding
-import com.eratoiklio.flashcards.model.FlashCard
+import com.eratoiklio.flashcards.model.SetWithFlashCards
 
-class WordListAdapter(context: Context) : RecyclerView.Adapter<WordListAdapter.FlashCardViewHolder>() {
+class SetListAdapter(context: Context) : RecyclerView.Adapter<SetListAdapter.FlashCardViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var words = emptyList<FlashCard>()
+    private var sets = emptyList<SetWithFlashCards>()
 
     inner class FlashCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val mainLang: MutableLiveData<String> = MutableLiveData()
-        val secondLang: MutableLiveData<String> = MutableLiveData()
+        val name: MutableLiveData<String> = MutableLiveData()
+        val description: MutableLiveData<String> = MutableLiveData()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlashCardViewHolder {
@@ -27,15 +27,15 @@ class WordListAdapter(context: Context) : RecyclerView.Adapter<WordListAdapter.F
     }
 
     override fun onBindViewHolder(holder: FlashCardViewHolder, position: Int) {
-        val current = words[position]
-        holder.mainLang.value = current.mainLanguageWord
-        holder.secondLang.value = current.secondLanguageWord
+        val current = sets[position]
+        holder.name.value = current.set.name
+        holder.description.value = current.set.description
     }
 
-    internal fun setWords(words: List<FlashCard>) {
-        this.words = words
+    internal fun setData(sets: List<SetWithFlashCards>) {
+        this.sets = sets
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = words.size
+    override fun getItemCount(): Int = sets.size
 }

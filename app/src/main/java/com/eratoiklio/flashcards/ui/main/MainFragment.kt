@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratoiklio.flashcards.databinding.MainFragmentBinding
@@ -24,7 +23,7 @@ class MainFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this, ViewModelFactory(activity?.application)).get(MainViewModel::class.java)
         viewModel.allFlashCards.observe(this, Observer {
-            cards -> viewModel.adapter.setWords(cards)
+            cards -> viewModel.adapter.setData(cards)
         })
     }
 
