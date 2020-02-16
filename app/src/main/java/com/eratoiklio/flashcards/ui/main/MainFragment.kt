@@ -13,16 +13,12 @@ import com.eratoiklio.flashcards.viewmodel.ViewModelFactory
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, ViewModelFactory(activity?.application)).get(MainViewModel::class.java)
-        viewModel.allFlashCards.observe(this, Observer {
+        viewModel = ViewModelProvider(this, ViewModelFactory.instance).get(MainViewModel::class.java)
+        viewModel.allSets.observe(this, Observer {
             cards -> viewModel.adapter.setData(cards)
         })
     }

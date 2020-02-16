@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.eratoiklio.flashcards.databinding.FlashCardItemBinding
-import com.eratoiklio.flashcards.model.SetWithFlashCards
+import com.eratoiklio.flashcards.model.FlashCardSet
 
 class SetListAdapter(context: Context) : RecyclerView.Adapter<SetListAdapter.FlashCardViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var sets = emptyList<SetWithFlashCards>()
+    private var sets = emptyList<FlashCardSet>()
 
     inner class FlashCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: MutableLiveData<String> = MutableLiveData()
@@ -28,11 +28,11 @@ class SetListAdapter(context: Context) : RecyclerView.Adapter<SetListAdapter.Fla
 
     override fun onBindViewHolder(holder: FlashCardViewHolder, position: Int) {
         val current = sets[position]
-        holder.name.value = current.set.name
-        holder.description.value = current.set.description
+        holder.name.value = current.name
+        holder.description.value = current.description
     }
 
-    internal fun setData(sets: List<SetWithFlashCards>) {
+    internal fun setData(sets: List<FlashCardSet>) {
         this.sets = sets
         notifyDataSetChanged()
     }

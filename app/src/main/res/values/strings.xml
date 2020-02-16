@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Flash Cards</string>
+    <string name="new_set_header">Create new flash card set</string>
+    <string name="new_set_name">Set name</string>
+    <string name="new_set_desc">Set description</string>
+    <string name="app_save">Save</string>
 </resources>

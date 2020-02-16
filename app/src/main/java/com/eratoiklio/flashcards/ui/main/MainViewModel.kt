@@ -3,25 +3,25 @@ package com.eratoiklio.flashcards.ui.main
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import com.eratoiklio.flashcards.R
 import com.eratoiklio.flashcards.data.FlashCardDao
 import com.eratoiklio.flashcards.data.FlashCardDb
 import com.eratoiklio.flashcards.model.FlashCardSet
 import com.eratoiklio.flashcards.model.SetWithFlashCards
 import com.eratoiklio.flashcards.ui.flashcard.SetListAdapter
-import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : ViewModel() {
+class MainViewModel(application: Application, private val navController: NavController) : ViewModel() {
 
     private val dao: FlashCardDao = FlashCardDb.getDatabase(application).flashCardDao()
-    val allFlashCards: LiveData<List<SetWithFlashCards>>
+    val allSets: LiveData<List<FlashCardSet>>
     val adapter = SetListAdapter(application)
 
     init {
-        allFlashCards = dao.getSets()
+        allSets = dao.getAllSets()
     }
 
-    fun insertTmp() = viewModelScope.launch {
-        dao.insertSet(FlashCardSet(name = "Test", description = "Test"))
+    fun insertTmp() {
+        navController.navigate(R.id.newFlashCardSetFragment)
     }
 }

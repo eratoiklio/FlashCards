@@ -6,5 +6,13 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.eratoiklio.flashcards.ui.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_newFlashCardSetFragment"
+            app:destination="@id/newFlashCardSetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newFlashCardSetFragment"
+        android:name="com.eratoiklio.flashcards.ui.flashcard.NewFlashCardSetFragment"
+        android:label="NewFlashCardSetFragment" />
 </navigation>

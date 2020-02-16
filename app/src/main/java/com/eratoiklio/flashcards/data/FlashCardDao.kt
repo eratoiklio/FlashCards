@@ -9,11 +9,14 @@ interface FlashCardDao {
 
     @Transaction
     @Query("SELECT * from flash_card ORDER BY mainLanguageWord ASC")
-    fun getFlashCards(): LiveData<List<FlashCardWithSets>>
+    fun getFlashCardsWithSets(): LiveData<List<FlashCardWithSets>>
 
     @Transaction
     @Query("SELECT * from flash_card_set ORDER BY name ASC")
-    fun getSets(): LiveData<List<SetWithFlashCards>>
+    fun getSetsWithFlashCards(): LiveData<List<SetWithFlashCards>>
+
+    @Query("SELECT * from flash_card_set ORDER BY name ASC")
+    fun getAllSets(): LiveData<List<FlashCardSet>>
 
     @Query("DELETE FROM flash_card")
     suspend fun deleteAll()
