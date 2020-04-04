@@ -10,9 +10,16 @@
         <action
             android:id="@+id/action_mainFragment_to_newFlashCardSetFragment"
             app:destination="@id/newFlashCardSetFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_newFlashCardFragment"
+            app:destination="@id/newFlashCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/newFlashCardSetFragment"
         android:name="com.eratoiklio.flashcards.ui.flashcard.NewFlashCardSetFragment"
         android:label="NewFlashCardSetFragment" />
+    <fragment
+        android:id="@+id/newFlashCardFragment"
+        android:name="com.eratoiklio.flashcards.ui.flashcard.NewFlashCardFragment"
+        android:label="NewFlashCardFragment" />
 </navigation>

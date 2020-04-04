@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eratoiklio.flashcards.databinding.FlashCardItemBinding
 import com.eratoiklio.flashcards.model.FlashCardSet
 
-class SetListAdapter(context: Context) : RecyclerView.Adapter<SetListAdapter.FlashCardViewHolder>() {
+class SetListAdapter(context: Context) :
+    RecyclerView.Adapter<SetListAdapter.FlashCardViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var sets = emptyList<FlashCardSet>()

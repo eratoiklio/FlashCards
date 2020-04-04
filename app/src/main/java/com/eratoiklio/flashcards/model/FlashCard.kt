@@ -3,13 +3,17 @@ package com.eratoiklio.flashcards.model
 import androidx.room.*
 
 @Entity(tableName = "flash_card")
-data class FlashCard(@PrimaryKey(autoGenerate = true) val cardId: Long = 0,
-                     val mainLanguageWord: String, val secondLanguageWord: String,
-                     val description: String = "", val uses: String = "", val firstShowMainLanguage: Boolean = true)
+data class FlashCard(
+    @PrimaryKey(autoGenerate = true) val cardId: Long = 0,
+    val mainLanguageWord: String, val secondLanguageWord: String,
+    val description: String = "", val uses: String = ""
+)
 
 @Entity(tableName = "flash_card_set")
-data class FlashCardSet(@PrimaryKey(autoGenerate = true) val setId: Long = 0,
-                        val name: String, val description: String)
+data class FlashCardSet(
+    @PrimaryKey(autoGenerate = true) val setId: Long = 0,
+    val name: String, val description: String
+)
 
 @Entity(primaryKeys = ["cardId", "setId"])
 data class FlashCardSetJoin(val cardId: Long, val setId: Long)
@@ -23,7 +27,8 @@ data class SetWithFlashCards(
         associateBy = Junction(
             value = FlashCardSetJoin::class,
             parentColumn = "setId",
-            entityColumn = "cardId")
+            entityColumn = "cardId"
+        )
     )
     val cards: List<FlashCard>
 )
@@ -37,7 +42,8 @@ data class FlashCardWithSets(
         associateBy = Junction(
             value = FlashCardSetJoin::class,
             parentColumn = "cardId",
-            entityColumn = "setId")
+            entityColumn = "setId"
+        )
     )
     val sets: List<FlashCardSet>
 )

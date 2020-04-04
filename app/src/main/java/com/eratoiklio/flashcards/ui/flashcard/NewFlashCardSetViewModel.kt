@@ -4,6 +4,7 @@ import android.app.Application
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,18 +21,11 @@ import kotlinx.coroutines.launch
 class NewFlashCardSetViewModel(application: Application, private val navController: NavController) : ViewModel() {
 
     private val dao: FlashCardDao = FlashCardDb.getDatabase(application).flashCardDao()
-    private val flashCards: MutableList<FlashCard> = mutableListOf()
     private val selected: MutableList<Long> = mutableListOf()
+    val flashCards: LiveData<List<FlashCard>> = dao.getAllFlashCards()
     val setName: MutableLiveData<String> = MutableLiveData()
     val setDesc: MutableLiveData<String> = MutableLiveData()
     val adapter = FlashCardAdapter(selected)
-
-    init {
-        viewModelScope.launch {
-            flashCards.addAll(dao.getAllFlashCards().value ?: emptyList())
-            adapter.setData(flashCards)
-        }
-    }
 
     fun save() {
         if (setName.value.isNullOrBlank()) {
@@ -59,7 +53,8 @@ class NewFlashCardSetViewModel(application: Application, private val navControll
             viewType: Int
         ): FlashCardViewHolder {
             val binding = FlashCardListItemBinding.inflate(LayoutInflater.from(parent.context))
-            return FlashCardViewHolder(binding.root)
+            val viewHolder = FlashCardViewHolder(binding)
+            return viewHolder
         }
 
         override fun onBindViewHolder(holder: FlashCardViewHolder, position: Int) {
@@ -73,14 +68,11 @@ class NewFlashCardSetViewModel(application: Application, private val navControll
             notifyDataSetChanged()
         }
 
-        inner class FlashCardViewHolder(root: View) : RecyclerView.ViewHolder(root) {
-            val firstLanguageWord = MutableLiveData<String>()
-            val secondLanguageWord = MutableLiveData<String>()
-            val isSelected = MutableLiveData<Boolean>()
+        inner class FlashCardViewHolder(private val binding: FlashCardListItemBinding) : RecyclerView.ViewHolder(binding.root) {
             var cardId: Long = -1
 
             init {
-                root.setOnClickListener {
+                binding.root.setOnClickListener {
                     if (!selected.remove(cardId)) {
                         selected.add(cardId)
                     }
@@ -89,10 +81,11 @@ class NewFlashCardSetViewModel(application: Application, private val navControll
             }
 
             fun bind(flashCard: FlashCard) {
-                firstLanguageWord.value = flashCard.mainLanguageWord
-                secondLanguageWord.value = flashCard.secondLanguageWord
-                isSelected.value = selected.contains(flashCard.cardId)
+                binding.firstLanguage.text = flashCard.mainLanguageWord
+                binding.secondLanguage.text = flashCard.secondLanguageWord
+                binding.isAddedCheckbox.isChecked= selected.contains(flashCard.cardId)
                 cardId = flashCard.cardId
+                binding.executePendingBindings()
             }
 
         }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.eratoiklio.flashcards.ui.flashcard.NewFlashCardSetViewModel
+import com.eratoiklio.flashcards.ui.flashcard.NewFlashCardViewModel
 import com.eratoiklio.flashcards.ui.main.MainViewModel
 
 class ViewModelFactory private constructor(
@@ -27,6 +28,9 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(NewFlashCardSetViewModel::class.java) ->
                 NewFlashCardSetViewModel(application, navController) as T
+
+            modelClass.isAssignableFrom(NewFlashCardViewModel::class.java) ->
+                NewFlashCardViewModel(application, navController) as T
 
             else -> throw IllegalArgumentException("ViewModel Not Found")
         }

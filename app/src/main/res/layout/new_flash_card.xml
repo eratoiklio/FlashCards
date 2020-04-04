@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.eratoiklio.flashcards.ui.flashcard.NewFlashCardSetViewModel" />
+            type="com.eratoiklio.flashcards.ui.flashcard.NewFlashCardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,41 +18,62 @@
             android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_set_header"
+            android:text="@string/new_flash_card_header"
             android:layout_margin="16dp"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <EditText
-            android:id="@+id/set_name"
+            android:id="@+id/set_first_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="150dp"
             android:layout_marginStart="16dp"
-            android:hint="@string/new_set_name"
+            android:hint="@string/set_word_in_main_language"
             android:importantForAutofill="no"
             android:inputType="textImeMultiLine"
-            android:text="@={viewModel.setName}"
+            android:text="@={viewModel.firstWord}"
             app:layout_constraintTop_toBottomOf="@id/header"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <EditText
-            android:id="@+id/set_desc"
+            android:id="@+id/set_second_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="150dp"
             android:layout_margin="16dp"
-            android:hint="@string/new_set_desc"
-            android:text="@={viewModel.setDesc}"
+            android:hint="@string/set_word_in_second_language"
+            android:text="@={viewModel.secondWord}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/set_name"/>
+            app:layout_constraintTop_toBottomOf="@id/set_first_language"/>
 
+        <EditText
+            android:id="@+id/set_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="@string/new_set_desc"
+            android:minWidth="150dp"
+            android:text="@={viewModel.desc}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/set_second_language" />
+
+        <EditText
+            android:id="@+id/set_usage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="150dp"
+            android:layout_margin="16dp"
+            android:hint="@string/set_example_of_usage"
+            android:text="@={viewModel.usage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/set_description"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/set_desc"
+            app:layout_constraintTop_toBottomOf="@id/set_usage"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -60,11 +81,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:tint="@color/white"
             android:src="@drawable/ic_save_black_24dp"
             android:onClick="@{() -> viewModel.save()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:tint="@color/white"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

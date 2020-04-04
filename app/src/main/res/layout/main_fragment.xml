@@ -27,9 +27,39 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:src="@drawable/ic_add"
-            android:onClick="@{() -> viewModel.insertTmp()}"
+            android:onClick="@{() -> viewModel.showSubMenu()}"
+            android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/create_card"
+            android:visibility="@{viewModel.subMenuVisibility}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_card"
+            app:layout_constraintEnd_toEndOf="@id/fab"
+            app:layout_constraintBottom_toTopOf="@+id/create_set"
+            android:padding="8dp"
+            android:background="@drawable/sub_fab_bg"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:onClick="@{() -> viewModel.createFlashCard()}"
+            tools:visibility="visible"/>
+        <TextView
+            android:id="@+id/create_set"
+            android:visibility="@{viewModel.subMenuVisibility}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_set"
+            android:background="@drawable/sub_fab_bg"
+            app:layout_constraintEnd_toEndOf="@id/fab"
+            app:layout_constraintBottom_toTopOf="@id/fab"
+            android:onClick="@{() -> viewModel.createFlashCardSet()}"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"
+            tools:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Flash Cards</string>
     <string name="new_set_header">Create new flash card set</string>
+    <string name="new_flash_card_header">Create new flash card</string>
     <string name="new_set_name">Set name</string>
     <string name="new_set_desc">Set description</string>
     <string name="app_save">Save</string>
+    <string name="set_word_in_main_language">Set word in main language</string>
+    <string name="set_example_of_usage">Set example of usage</string>
+    <string name="set_word_in_second_language">Set word in second language</string>
+    <string name="new_set">New set</string>
+    <string name="new_card">New card</string>
 </resources>

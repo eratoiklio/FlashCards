@@ -25,7 +25,7 @@ interface FlashCardDao {
     suspend fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertCard(card: FlashCard)
+    suspend fun insertCard(card: FlashCard): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertSet(set: FlashCardSet): Long
