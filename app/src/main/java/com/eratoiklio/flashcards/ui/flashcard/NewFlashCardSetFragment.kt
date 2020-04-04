@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratoiklio.flashcards.databinding.NewFlashCardSetBinding
 import com.eratoiklio.flashcards.viewmodel.ViewModelFactory
 
@@ -22,6 +23,8 @@ class NewFlashCardSetFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = NewFlashCardSetBinding.inflate(layoutInflater)
         binding.viewModel = viewModel
+        binding.list.adapter = viewModel.adapter
+        binding.list.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 }

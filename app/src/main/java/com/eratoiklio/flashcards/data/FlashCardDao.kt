@@ -18,6 +18,9 @@ interface FlashCardDao {
     @Query("SELECT * from flash_card_set ORDER BY name ASC")
     fun getAllSets(): LiveData<List<FlashCardSet>>
 
+    @Query("SELECT * FROM flash_card ORDER BY mainLanguageWord ASC")
+    fun getAllFlashCards(): LiveData<List<FlashCard>>
+
     @Query("DELETE FROM flash_card")
     suspend fun deleteAll()
 
@@ -25,7 +28,7 @@ interface FlashCardDao {
     suspend fun insertCard(card: FlashCard)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertSet(set: FlashCardSet)
+    suspend fun insertSet(set: FlashCardSet): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertJoin(join: FlashCardSetJoin)
