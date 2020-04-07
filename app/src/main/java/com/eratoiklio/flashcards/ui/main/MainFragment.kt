@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratoiklio.flashcards.databinding.MainFragmentBinding
+import com.eratoiklio.flashcards.viewmodel.MainViewModel
 import com.eratoiklio.flashcards.viewmodel.ViewModelFactory
 
 class MainFragment : Fragment() {
@@ -18,7 +19,7 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel =
-            ViewModelProvider(this, ViewModelFactory.instance).get(MainViewModel::class.java)
+            ViewModelProvider(this, ViewModelFactory).get(MainViewModel::class.java)
         viewModel.allSets.observe(this, Observer { cards ->
             viewModel.adapter.setData(cards)
         })

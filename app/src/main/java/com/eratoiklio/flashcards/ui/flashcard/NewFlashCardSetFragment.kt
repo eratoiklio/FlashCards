@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratoiklio.flashcards.databinding.NewFlashCardSetBinding
+import com.eratoiklio.flashcards.viewmodel.NewFlashCardSetViewModel
 import com.eratoiklio.flashcards.viewmodel.ViewModelFactory
 
 class NewFlashCardSetFragment : Fragment() {
@@ -17,14 +18,16 @@ class NewFlashCardSetFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, ViewModelFactory.instance).get(NewFlashCardSetViewModel::class.java)
-        viewModel.flashCards.observe(this, Observer {
-                cards -> viewModel.adapter.setData(cards)
+        viewModel = ViewModelProvider(this, ViewModelFactory)
+            .get(NewFlashCardSetViewModel::class.java)
+        viewModel.flashCards.observe(this, Observer { cards ->
+            viewModel.setData(cards)
         })
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         val binding = NewFlashCardSetBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

@@ -9,18 +9,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratoiklio.flashcards.databinding.NewFlashCardBinding
-import com.eratoiklio.flashcards.databinding.NewFlashCardSetBinding
+import com.eratoiklio.flashcards.viewmodel.NewFlashCardViewModel
 import com.eratoiklio.flashcards.viewmodel.ViewModelFactory
 
 class NewFlashCardFragment : Fragment() {
+
     private lateinit var viewModel: NewFlashCardViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory.instance
-        ).get(NewFlashCardViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory)
+            .get(NewFlashCardViewModel::class.java)
         viewModel.sets.observe(this, Observer { sets ->
             viewModel.adapter.setData(sets)
         })

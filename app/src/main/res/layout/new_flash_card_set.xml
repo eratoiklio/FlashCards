@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.eratoiklio.flashcards.ui.flashcard.NewFlashCardSetViewModel" />
+            type="com.eratoiklio.flashcards.viewmodel.NewFlashCardSetViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:src="@drawable/ic_save_black_24dp"
-            android:onClick="@{() -> viewModel.save()}"
+            android:onClick="@{viewModel::save}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:tint="@color/white"/>
